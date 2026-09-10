@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:#0f0f0f;color:white;font-family:Arial;padding:15px;}
+   .container{max-width:500px;margin:0 auto;}
+   .back{color:#00ff88;text-decoration:none;font-size:13px;display:block;margin-bottom:15px;}
+    img{width:100%;border-radius:12px;margin-bottom:15px;}
+   .title{font-size:18px;font-weight:bold;margin-bottom:8px;}
+   .price{color:#00ff88;font-size:22px;font-weight:bold;margin-bottom:12px;}
+   .box{background:#151515;padding:12px;border-radius:10px;margin-bottom:10px;font-size:13px;}
+   .btn-wa{background:#25D366;color:white;padding:12px;border-radius:8px;border:none;width:100%;font-weight:bold;font-size:14px;cursor:pointer;}
+  </style>
+</head>
+<body>
+<div class="container">
+  <a href="index.html" class="back">← Back</a>
+  <img id="pImg">
+  <div class="title" id="pTitle"></div>
+  <div class="price" id="pPrice"></div>
+  <div class="box" id="pDesc"></div>
+  <div class="box">Seller: <span id="pSeller"></span></div>
+  <button class="btn-wa" id="waBtn">💬 WhatsApp</button>
+</div>
+<script>
+let id = localStorage.getItem("viewProductId");
+let products = JSON.parse(localStorage.getItem("marketSaleProducts")) || [];
+let p = products.find(x => x.id == id);
+
+if(p){
+  pImg.src = p.image;
+  pTitle.innerText = p.title;
+  pPrice.innerText = "$" + p.price;
+  pDesc.innerText = p.desc;
+  pSeller.innerText = p.seller;
+  waBtn.onclick = () => window.open(`https://wa.me/${p.whatsapp.replace(/[^0-9]/g,'')}?text=Hi, I'm interested in ${p.title}`)
+}
+</script>
+</body>
+</html>
